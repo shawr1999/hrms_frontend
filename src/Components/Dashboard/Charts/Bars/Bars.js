@@ -1,0 +1,112 @@
+import React, { Component } from 'react';
+import ReactApexChart from 'react-apexcharts';
+
+      class ApexChart extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+          
+            series: [{
+              name: 'Net Profit',
+              data: [44, 55, 57, 56, 61, 58, 6]
+            }, {
+              name: 'Revenue',
+              data: [76, 85, 101, 98, 87, 105, 5]
+            }],
+            options: {
+              chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                  show: false
+                }
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                  columnWidth: '45%',
+                  borderRadius: 3,
+                  endingShape: 'rounded',
+                  borderRadiusApplication: 'end',
+                  borderRadiusWhenStacked: 'last'
+                  
+                },
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+              },
+              xaxis: {
+                categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+              },
+              yaxis: {
+                // title: {
+                //   text: '$ (thousands)'
+                // }
+              },
+              fill: {
+                opacity: 1,
+                colors: ['#53A6F8', '#D4E9FF'],
+              },
+              legend: {
+             show: false,
+             
+        },
+              tooltip: {
+                y: {
+                  formatter: function (val) {
+                    return "$ " + val + " thousands"
+                  }
+                }
+              }
+            },
+          
+          
+          };
+        }
+
+      
+
+        render() {
+          return (
+            <div>
+              <div id="chart">
+                <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={"200px"} />
+              </div>
+              <div id="html-dist"></div>
+            </div>
+          );
+        }
+      }
+
+
+export default function Bars() {
+  return (
+    <div>
+      <div className="card" style={{ borderRadius: "12px" }}>
+                <div class="card-header bg-white">Project employment
+</div>
+
+                      <div className="card-body">
+                          <ApexChart />
+                          <div className="row">
+                              <div className="col-md-6">
+                                  <p><i class="fa-solid fa-circle mr-2" style={{color:"#53A6F8"}}></i>Project</p>
+                              </div>
+                              <div className="col-md-6 text-right">
+                                  <p><i class="fa-solid fa-circle mr-2" style={{color:"#D4E9FF"}}></i>Bench</p>
+                              </div>
+                          </div>
+                      </div>
+
+                      
+                      
+                  </div>
+    </div>
+  )
+}

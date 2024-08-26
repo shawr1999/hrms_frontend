@@ -1,0 +1,11 @@
+.main{
+  position: absolute;
+  top: 15%;
+  right: 0;
+  width: 85%;
+  z-index: -1;
+}
+
+.main-active{
+  width: 94%;
+}

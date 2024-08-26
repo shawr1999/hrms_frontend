@@ -1,0 +1,11 @@
+.atten{
+    background-image: url('/./src/Components/Employee_Dashboard/atten.png');
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.clockin{
+    background-color: blueviolet;
+    background-color: rgb(4, 0, 255);
+    background-color: rgba(0, 128, 0, 0.5);
+}
