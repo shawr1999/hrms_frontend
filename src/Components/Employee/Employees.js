@@ -166,7 +166,7 @@ const CreateEmployee = () => {
                                     value={employee[key]}
                                     onChange={handleChange}
                                 >
-                                    <option value="">Select Gender</option>
+                                    <option value="">Select Employee Type</option>
                                     {employee_type.map(emplyeeType => (
                                         <option key={emplyeeType} value={emplyeeType}>{emplyeeType}</option>
                                     ))}
