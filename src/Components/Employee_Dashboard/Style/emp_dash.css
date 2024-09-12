@@ -7,5 +7,24 @@
 .clockin{
     background-color: blueviolet;
     background-color: rgb(4, 0, 255);
+    background-color: rgba(0, 128, 0);
+}
+.clockin:hover{
+    background-color: blueviolet;
+    background-color: rgb(4, 0, 255);
     background-color: rgba(0, 128, 0, 0.5);
+    border-color: rgba(0, 128, 0);
+}
+.clockout{
+    background-color: blueviolet;
+    background-color: rgb(4, 0, 255);
+    background-color: rgb(245, 248, 39);
+}
+.clockout:hover{
+    background-color: blueviolet;
+    background-color: rgb(4, 0, 255);
+    background-color: rgba(126, 128, 39, 0.5);
+    border-color: rgb(245, 248, 39);
+    color: white;
+    
 }
