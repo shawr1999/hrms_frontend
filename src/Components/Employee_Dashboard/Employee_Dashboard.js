@@ -159,7 +159,7 @@ export default function Employee_Dashboard() {
                                                     </button>
                                                 </div>
                                                 <div className="col-md-6">
-                                                     <button className='btn clockout btn-warning' onClick={handleClockOut}>
+                                                     <button className='btn clockout' onClick={handleClockOut}>
                                                         Clock Out
                                                     </button>
                                                 </div>
