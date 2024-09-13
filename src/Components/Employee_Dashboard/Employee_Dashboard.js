@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import $ from 'jquery';
 import Swal from 'sweetalert2';
 import { useNavigate,Link } from 'react-router-dom';
 import working from './working-man.png';
@@ -18,12 +19,16 @@ import ticket from './ticket.png';
 import chat from './chat.png';
 import payroll from './payroll.png';
 import holiday from './holiday.png';
+$.DataTable = require('datatables.net');
+
+const tableName = "table1";
 
 export default function Employee_Dashboard() {
     const [Branches, setBranches] = useState([]);
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
     const [Leaves, setLeaves] = useState([]);
+    const [tickets, setTickets] = useState([]);
     const employee_branch = localStorage.getItem("Curr_Emp_id");
 
     useEffect(() => {
@@ -36,12 +41,22 @@ export default function Employee_Dashboard() {
             .then(response => response.json())
             .then(data => setLeaves(data))
             .catch(error => console.error('Error fetching roles:', error));
+
+        fetch('https://shawr1999.pythonanywhere.com//api/tickets/')
+            .then(response => response.json())
+            .then(data => setTickets(data))
+            .catch(error => console.error('Error fetching roles:', error));
     }, []);
 
     const Data = {
         UserId: localStorage.getItem('Curr_Emp_id')
     };
 
+
+    const handleEdit = (event) => {
+        const ticketId = $(event.currentTarget).data('id');
+        navigate(`/edit-Ticket/${ticketId}`);
+    };
     const handleClockIn = () => {
         axios.post('https://shawr1999.pythonanywhere.com//api/clock_in/', Data, {
             headers: {
@@ -176,30 +191,34 @@ export default function Employee_Dashboard() {
                                                   <thead style={{background:"blueviolet", color:"white"}}>
                                                   <tr>
                                                       <th>Subject</th>
-                                                      <th>By</th>
+                                                      <th>To</th>
                                                       <th>Status</th>
                                                       <th>Action</th>
                                                   </tr>
                                                   </thead>
                                                   <tbody className='overflow-auto'>
-                                                  <tr>
-                                                      <td>Ticket for New Mouse</td>
-                                                      <td>John</td>
-                                                      <td><button className='btn text-white m-2' style={{background:"blueViolet"}}>Open</button></td>
-                                                        <td>
-                                                            <div className='d-flex'>
-                                                            <button type="button" className="btn text-white m-2" style={{background:"blueViolet"}} data-toggle="tooltip" data-placement="top" title="View">
-                                                        <i className="fa-solid fa-eye"></i>
-                                                        </button>
-                                                            <button className='btn text-white m-2' style={{background:"blueViolet"}} data-toggle="tooltip" data-placement="top" title="Accept">
-                                                                <i className="fa-solid fa-circle-check"></i>
-                                                            </button>
-                                                            <button className='btn text-white m-2' style={{background:"blueViolet"}} data-toggle="tooltip" data-placement="top" title="Decline">
-                                                                <i className="fa-solid fa-xmark"></i>
-                                                            </button>
-                                                        </div>
-                                                        </td>
-                                                  </tr>
+                                                    {tickets.map(tick=>
+                                                    <tr>
+                                                    <td>{tick.Subject}</td>
+                                                    <td>{tick.Ticket_for}</td>
+                                                    <td><button className='btn text-white m-2' style={{background:"blueViolet"}}>Open</button></td>
+                                                      <td>
+                                                          <div className='d-flex'>
+                                                          <Link to={`/edit-Ticket/${tick.id}`} type="button" className="btn text-white m-2" style={{background:"blueViolet"}} data-toggle="tooltip" data-placement="top" title="View">
+                                                      <i className="fa-solid fa-eye"></i>
+                                                      </Link>
+                                                          {/* <button className='btn text-white m-2' style={{background:"blueViolet"}} data-toggle="tooltip" data-placement="top" title="Accept">
+                                                              <i className="fa-solid fa-circle-check"></i>
+                                                          </button>
+                                                          <button className='btn text-white m-2' style={{background:"blueViolet"}} data-toggle="tooltip" data-placement="top" title="Decline">
+                                                              <i className="fa-solid fa-xmark"></i>
+                                                          </button> */}
+                                                      </div>
+                                                      </td>
+                                                </tr>
+
+                                                    )}
+                                                  
                                                   </tbody>
                                                 </table>
                                             </div>
@@ -218,7 +237,7 @@ export default function Employee_Dashboard() {
                                     <div className="card shadow-lg" style={{background:'blueviolet', borderRadius:'15px'}}>
                                         <div className="card-body">
                                             <div className="row">
-                                              <div className="col-md-4"><img src={total_leave} alt="total leaves" width={'100%'}/></div>
+                                              <div className="col-md-4"><img src={total_leave} alt="total leaves" style={{width:'100%'}}/></div>
                                               <div className="col-md-8 text-white"><h6>Total Leaves</h6>
                                                {Leaves.map(lv =>
                                                         
@@ -234,7 +253,7 @@ export default function Employee_Dashboard() {
                                     <div className="card shadow-lg" style={{background:'blueviolet', borderRadius:'15px'}}>
                                         <div className="card-body">
                                             <div className="row">
-                                              <div className="col-md-4"><img src={medical} alt="medical leave" width={'100%'}/></div>
+                                              <div className="col-md-4"><img src={medical} alt="medical leave" style={{width:'100%'}}/></div>
                                                 <div className="col-md-8 text-white "><h6>Medical Leaves</h6>
                                                     {Leaves.map(lv =>
                                                         <h4 className='d-block'>{ lv.leave_name==="Medical Leave"?lv.days_per_year:"0" }</h4>
@@ -251,11 +270,11 @@ export default function Employee_Dashboard() {
                                     <div className="card shadow-lg" style={{background:'blueviolet', borderRadius:'15px'}}>
                                         <div className="card-body">
                                             <div className="row">
-                                              <div className="col-md-4"><img src={casual} alt="casual leave" width={'100%'}/></div>
-                                                <div className="col-md-8 text-white"><h6>Casual Leaves</h6>
+                                              <div className="col-md-5"><img src={casual} alt="casual leave" style={{width:'100%'}}/></div>
+                                                <div className="col-md-7 text-white"><h6>Casual Leaves</h6>
                                                     {Leaves.map(lv =>
                                                         
-                                                        <h4 className='d-block'>{lv.leave_name === "Casual Leave"? lv.days_per_year:"0"}</h4>
+                                                        <h4 className='text-left'>{lv.leave_name === "Casual Leave"? lv.days_per_year:"0"}</h4>
                                                     )}
                                                     </div>
                                               </div>
@@ -266,7 +285,7 @@ export default function Employee_Dashboard() {
                                     <div className="card shadow-lg" style={{background:'blueviolet', borderRadius:'15px'}}>
                                         <div className="card-body">
                                             <div className="row">
-                                              <div className="col-md-4"><img src={earned} alt="earned leave" width={'100%'}/></div>
+                                              <div className="col-md-4"><img src={earned} alt="earned leave" style={{width:'100%'}}/></div>
                                               <div className="col-md-8 text-white"><h6>Earned Leaves</h6>
                                               {Leaves.map(lv =>
                                                         
