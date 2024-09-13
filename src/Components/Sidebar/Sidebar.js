@@ -16,6 +16,7 @@ const Sidebar = () => {
   const [rolePermissions, setRolePermissions] = useState([]);
   const User_Role_Id = localStorage.getItem('userRoleId');
   const User_Role_Name = localStorage.getItem('Curr_User');
+  const emp_name = localStorage.getItem('Curr_Emp_name');
   useEffect(() => {
 
         const email = localStorage.getItem('userEmail');
@@ -115,9 +116,10 @@ const Sidebar = () => {
           <div class="sidebar">
             <div class="head">
         <div class="user-img"><img src={wsds} alt=""/></div>
-        <div class="user-details">
-          <p class="title">web developer</p>
-          <p class="name">WSDS</p>
+        <div class="user-details mt-2" style={{lineHeight:'5px'}}>
+        <p class="name">{emp_name}</p>
+          <p class="title">{User_Role_Name}</p>
+          
         </div>
       </div>
       {/* <div class=""><i class="ph-bold ph-caret-left"></i></div> */}
