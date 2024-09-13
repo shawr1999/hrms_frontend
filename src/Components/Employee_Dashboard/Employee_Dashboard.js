@@ -25,11 +25,13 @@ const tableName = "table1";
 
 export default function Employee_Dashboard() {
     const [Branches, setBranches] = useState([]);
+    const [greeting, setGreeting] = useState('');
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
     const [Leaves, setLeaves] = useState([]);
     const [tickets, setTickets] = useState([]);
     const employee_branch = localStorage.getItem("Curr_Emp_id");
+    const emp_name = localStorage.getItem('Curr_Emp_name');
 
     useEffect(() => {
         fetch('https://shawr1999.pythonanywhere.com//api/employee_view/')
@@ -46,6 +48,16 @@ export default function Employee_Dashboard() {
             .then(response => response.json())
             .then(data => setTickets(data))
             .catch(error => console.error('Error fetching roles:', error));
+
+            const currentHour = new Date().getHours();
+            if (currentHour < 12) {
+                setGreeting('Good Morning');
+            } else if (currentHour < 18) {
+                setGreeting('Good Afternoon');
+            } else {
+                setGreeting('Good Evening');
+            }
+    
     }, []);
 
     const Data = {
@@ -122,8 +134,10 @@ export default function Employee_Dashboard() {
                 <div className="container-fluid p-5">
                     <div className="row">
                         <div className="col-md-6 px-5">
-                            <h3><strong>Hello</strong> Employee!</h3>
-                            <p>Good Morning</p>
+                            <h3><strong>Hello</strong> {emp_name}!</h3>
+                            <p>
+                                {greeting}
+                            </p>
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="card border-0 shadow-lg" style={{background:"blueviolet", color:"white", borderRadius:"15px"}}>
