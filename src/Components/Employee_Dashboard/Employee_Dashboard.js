@@ -218,7 +218,7 @@ export default function Employee_Dashboard() {
                                     <div className="card shadow-lg" style={{background:'blueviolet', borderRadius:'15px'}}>
                                         <div className="card-body">
                                             <div className="row">
-                                              <div className="col-md-4"><img src={total_leave} alt="total leaves" height={'65px'}/></div>
+                                              <div className="col-md-4"><img src={total_leave} alt="total leaves" width={'100%'}/></div>
                                               <div className="col-md-8 text-white"><h6>Total Leaves</h6>
                                                {Leaves.map(lv =>
                                                         
@@ -234,7 +234,7 @@ export default function Employee_Dashboard() {
                                     <div className="card shadow-lg" style={{background:'blueviolet', borderRadius:'15px'}}>
                                         <div className="card-body">
                                             <div className="row">
-                                              <div className="col-md-4"><img src={medical} alt="medical leave" height={'50px'}/></div>
+                                              <div className="col-md-4"><img src={medical} alt="medical leave" width={'100%'}/></div>
                                                 <div className="col-md-8 text-white "><h6>Medical Leaves</h6>
                                                     {Leaves.map(lv =>
                                                         <h4 className='d-block'>{ lv.leave_name==="Medical Leave"?lv.days_per_year:"0" }</h4>
@@ -251,7 +251,7 @@ export default function Employee_Dashboard() {
                                     <div className="card shadow-lg" style={{background:'blueviolet', borderRadius:'15px'}}>
                                         <div className="card-body">
                                             <div className="row">
-                                              <div className="col-md-4"><img src={casual} alt="casual leave" height={'60px'}/></div>
+                                              <div className="col-md-4"><img src={casual} alt="casual leave" width={'100%'}/></div>
                                                 <div className="col-md-8 text-white"><h6>Casual Leaves</h6>
                                                     {Leaves.map(lv =>
                                                         
@@ -266,7 +266,7 @@ export default function Employee_Dashboard() {
                                     <div className="card shadow-lg" style={{background:'blueviolet', borderRadius:'15px'}}>
                                         <div className="card-body">
                                             <div className="row">
-                                              <div className="col-md-4"><img src={earned} alt="earned leave" height={'60px'}/></div>
+                                              <div className="col-md-4"><img src={earned} alt="earned leave" width={'100%'}/></div>
                                               <div className="col-md-8 text-white"><h6>Earned Leaves</h6>
                                               {Leaves.map(lv =>
                                                         
