@@ -39,15 +39,15 @@ console.log(emp_name)
                   <i className="fa-solid fa-bars mt-3"></i>
                 </a>
               </li>
-            //   <li class="nav-item">
-            //     <div class="input-group ml-4">
+              <li class="nav-item">
+                <div class="input-group ml-4">
       
-            //       <input type="search" class="form-control border-right-0 search" placeholder='Search' style={{ height: "50px" }} />
-            //     <div class="input-group-prepend bg-transparent">
-            //   <span class="input-group-text bg-white border-left-0"><i class="fa-solid fa-magnifying-glass"></i></span>
-            //   </div>
-            // </div>
-            // </li>
+                  <input type="search" class="form-control border-right-0 search" placeholder='Search' style={{ height: "50px" }} />
+                <div class="input-group-prepend bg-transparent">
+              <span class="input-group-text bg-white border-left-0"><i class="fa-solid fa-magnifying-glass"></i></span>
+              </div>
+            </div>
+            </li>
            
           </ul>
           <ul class="navbar-nav ml-auto">
